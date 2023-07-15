@@ -1,4 +1,23 @@
 
+async def send_large_message(ctx, text):
+    for i in range(0, len(text), 2000):
+        await ctx.send(text[i:i+2000])
+
+
+# A dictionary to store user data
+user_data_store = {}
+
+# A function to get user data
+def get_user_data(user_id):
+    # Get the data for the user, or return an empty dictionary if the user doesn't exist
+    return user_data_store.get(user_id, {})
+
+# A function to set user data
+def set_user_data(user_id, user_data):
+    # Set the data for the user
+    user_data_store[user_id] = user_data
+
+
 import discord
 from discord.ext import commands
 import openai
@@ -102,6 +121,134 @@ async def novel(ctx):
 @bot.command()
 async def hello(ctx):
   await ctx.send("Hello there!")
+
+@bot.command()
+async def BrainX(ctx, *, brainx: str):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+    user_data['BrainX'] = brainx
+    set_user_data(user_id, user_data)
+    await ctx.send(f"BrainX set to: {brainx}")
+
+@bot.command()
+async def Genre(ctx, *, genre: str):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+    user_data['Genre'] = genre
+    set_user_data(user_id, user_data)
+    await ctx.send(f"Genre set to: {genre}")
+
+@bot.command()
+async def Style(ctx, *, style: str):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+    user_data['Style'] = style
+    set_user_data(user_id, user_data)
+    await ctx.send(f"Style set to: {style}")
+
+@bot.command()
+async def GenerateSynopsis(ctx):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+
+    # Construct the system message to set the behavior of the assistant
+    system_message = f"You are an assistant that generates a synopsis based on the following information: BrainX: {user_data['BrainX']}, Genre: {user_data['Genre']}, Style: {user_data['Style']}."
+
+    # Generate the synopsis
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-16k",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": "Generate a synopsis."}
+        ]
+    )
+
+    # Extract the assistant's reply
+    synopsis = response['choices'][0]['message']['content']
+
+    # Store the synopsis
+    user_data['Synopsis'] = synopsis
+    set_user_data(user_id, user_data)
+
+    # Send the synopsis as a message
+    await send_large_message(ctx, synopsis)
+
+@bot.command()
+async def GenerateChapterOutline(ctx):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+
+    # Construct the system message to set the behavior of the assistant
+    system_message = f"You are an assistant that generates a chapter outline based on the following information: BrainX: {user_data['BrainX']}, Genre: {user_data['Genre']}, Style: {user_data['Style']}, Synopsis: {user_data['Synopsis']}."
+
+    # Generate the chapter outline
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-16k",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": "Generate a chapter outline."}
+        ]
+    )
+
+    # Extract the assistant's reply
+    chapter_outline = response['choices'][0]['message']['content']
+
+    # Store the chapter outline
+    user_data['ChapterOutline'] = chapter_outline
+    set_user_data(user_id, user_data)
+
+    # Send the chapter outline as a message
+    await send_large_message(ctx, chapter_outline)
+
+@bot.command()
+async def GenerateChapterBeats(ctx):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+
+    # Construct the system message to set the behavior of the assistant
+    system_message = f"You are an assistant that generates chapter beats based on the following information: BrainX: {user_data['BrainX']}, Genre: {user_data['Genre']}, Style: {user_data['Style']}, Synopsis: {user_data['Synopsis']}, Chapter Outline: {user_data['ChapterOutline']}."
+
+    # Generate the chapter beats
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-16k",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": "Generate chapter beats."}
+        ]
+    )
+
+    # Extract the assistant's reply
+    chapter_beats = response['choices'][0]['message']['content']
+
+    # Store the chapter beats
+    user_data['ChapterBeats'] = chapter_beats
+    set_user_data(user_id, user_data)
+
+    # Send the chapter beats as a message
+    await send_large_message(ctx, chapter_beats)
+
+@bot.command()
+async def GenerateChapter(ctx):
+    user_id = str(ctx.author.id)
+    user_data = get_user_data(user_id)
+
+    # Construct the system message to set the behavior of the assistant
+    system_message = f"You are an assistant that generates a chapter based on the following information: BrainX: {user_data['BrainX']}, Genre: {user_data['Genre']}, Style: {user_data['Style']}, Synopsis: {user_data['Synopsis']}, Chapter Outline: {user_data['ChapterOutline']}, Chapter Beats: {user_data['ChapterBeats']}."
+
+    # Generate the chapter
+    response = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo-16k",
+        messages=[
+            {"role": "system", "content": system_message},
+            {"role": "user", "content": "Generate a chapter."}
+        ]
+    )
+
+    # Extract the assistant's reply
+    chapter = response['choices'][0]['message']['content']
+
+    # Send the chapter as a message
+    await send_large_message(ctx, chapter)
 
 # Run bot
 bot.run(token)
