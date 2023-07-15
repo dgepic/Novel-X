@@ -69,11 +69,20 @@ OPENAI_API_KEY=your_openai_key
 
 It also uses a `db.json` file to store user preference data.
 
-## Running the Bot
+## Installation
 
 ```
-pip install -r requirements.txt
-python bot.py
+pip install discord.py python-dotenv openai tinydb
+```
+
+This will install the required packages to run the bot.
+
+## Running the Bot
+
+Then to start the bot:
+
+```
+python bot.py 
 ```
 
 The bot will connect to Discord using the provided token.
