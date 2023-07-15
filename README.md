@@ -25,6 +25,21 @@ This is a Discord bot built with [discord.py](https://discordpy.readthedocs.io/e
 - `$GenerateChapterBeats` - Generate chapter beats 
 - `$GenerateChapter` - Generate a full chapter
 
+## BrainX System - A Simple Story
+
+The bot can be used to generate a simple short story by setting a genre and style, then using the `$novel` command. 
+
+For example:
+
+```
+$Genre science fiction 
+$Style action-packed
+
+$novel
+```
+
+This will use GPT-3 to generate a short sci-fi story in an action-packed style based on those preferences.
+
 ## BrainX System
 
 1. **BrainX:** The user uses this command to provide free-form input about the overall story idea and context. This data is stored and later used as a part of the prompt when making calls to the OpenAI API. The command could look like this: `$BrainX <free-form story context here>`
