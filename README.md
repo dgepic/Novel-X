@@ -1,9 +1,4 @@
 # Novel-X
-Novel Creation Discord Bot
-
-Sure, here is a sample README file that provides a detailed explanation of your bot and how to use it:
-
----
 
 # Novel Generator Discord Bot
 
