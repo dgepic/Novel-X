@@ -1,63 +1,60 @@
 # Novel-X
 
-# Novel Generator Discord Bot
+# Discord Bot
 
-## Introduction
+This is a simple Discord bot built with Python and [discord.py](https://discordpy.readthedocs.io/en/stable/). It uses [OpenAI's GPT-3.5](https://openai.com/blog/gpt-3-5/) to generate stories based on user-defined styles and genres.
 
-This Discord bot uses OpenAI's GPT-3 to generate a novel based on user-specified preferences. Users can set their preferences for genre, style, summary, and world, and the bot will generate a novel accordingly.
+## Features
+
+- `set` command to store user preferences 
+- `novel` command to generate a story based on the user's stored style and genre
+- `hello` simple test command
 
 ## Setup
 
-1. Clone this repository.
+### Prerequisites
 
-2. Install the required Python packages:
+- Python 3.6+
+- [discord.py](https://discordpy.readthedocs.io/en/stable/)
+- [openai](https://github.com/openai/openai-python)
+- [python-dotenv](https://github.com/theskumar/python-dotenv)
+- [tinydb](https://github.com/msiemens/tinydb)
 
-```
-pip install -r requirements.txt
-```
+### Installation
 
-3. Replace `'YOUR_DISCORD_BOT_TOKEN'` and `'YOUR_OPENAI_API_KEY'` in `bot.py` with your Discord bot token and OpenAI API key.
+1. Clone the repo
+   ```sh
+   git clone https://github.com/yourname/discord-bot.git
+   ```
+2. Install dependencies
+   ```sh
+   pip install -r requirements.txt
+   ```
+3. Create a `.env` file with your Discord bot token and OpenAI API key
+   ```
+   DISCORD_TOKEN=xxxxxxxxxxxx
+   OPENAI_API_KEY=xxxxxxxxxxxx  
+   ```
+4. Run the bot
+   ```py
+   python bot.py
+   ```
 
-4. Run the bot:
+## Usage
 
-```
-python bot.py
-```
+- `$set` - Stores user preferences
+  - Usage: 
+    ```
+    $set style humor
+    $set genre sci-fi
+    ```
+- `$novel` - Generates a story based on the user's stored style and genre
+- `$hello` - Simple test command
 
-The bot should now be running and responding to commands.
+## Acknowledgments
 
-## Commands
+- [discord.py](https://discordpy.readthedocs.io/en/stable/) for the Discord API wrapper
+- [OpenAI](https://openai.com/) for the GPT-3.5 API
+- [TinyDB](https://github.com/msiemens/tinydb) for simple user data storage
 
-The bot supports the following commands:
-
-- `$set <key> <value>`: Sets a preference for the user. The `<key>` can be one of the following:
-  - `genre`: The genre of the novel.
-  - `style`: The writing style of the novel.
-  - `summary`: A brief summary of the novel's plot.
-  - `world`: A description of the novel's world.
-  
-  The `<value>` is the desired setting for the given key.
-
-  Example: `$set genre fantasy`
-
-- `$novel`: Generates a novel based on the user's preferences. The bot will send a series of prompts to OpenAI's GPT-3, first describing the world, then introducing the main characters, and finally writing the first chapter of the novel. The generated text will be sent back to the user.
-
-  Example: `$novel`
-
-Please note that these commands need to be executed in a channel where the bot is present.
-
-## Implementation Details
-
-The bot is implemented in Python using the `discord.py` library. User preferences are stored in a dictionary, which is indexed by user ID to allow each user to have their own preferences. The bot uses the OpenAI API to generate the novel, using the user's preferences to craft the prompts.
-
-## Future Work
-
-There are a few potential improvements that could be made to the bot:
-
-- Add error handling to prevent the bot from crashing if a user tries to generate a novel without first setting their preferences.
-- Improve the novel generation process by breaking it down into multiple prompts. This could help to produce more consistent and detailed stories.
-- Add a graphical interface for setting preferences, either using Discord's new button or slash command features, or by creating a separate web interface.
-
----
-
-
+This covers the basic functionality, commands, setup, and usage of the Discord bot. Let me know if you would like me to expand or modify the documentation further.
