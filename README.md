@@ -60,4 +60,4 @@ There are a few potential improvements that could be made to the bot:
 
 ---
 
-Please let me know if you need more information or additional sections.
+
