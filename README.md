@@ -25,6 +25,8 @@ This is a Discord bot built with [discord.py](https://discordpy.readthedocs.io/e
 - `$GenerateChapterBeats` - Generate chapter beats 
 - `$GenerateChapter` - Generate a full chapter
 
+## BrainX System
+
 1. **BrainX:** The user uses this command to provide free-form input about the overall story idea and context. This data is stored and later used as a part of the prompt when making calls to the OpenAI API. The command could look like this: `$BrainX <free-form story context here>`
 
 2. **Genre:** The user uses this command to specify the genre, tropes, tone, and style of the story. This information is also stored and used in generating the story's synopsis, outlines, and beats. The command could look like this: `$Genre <story genre, tropes, tone, and style here>`
