@@ -98,8 +98,3 @@ The bot can be deployed to any service that can run a Python app. Some options:
 
 The `.env` file and `db.json` file will need to be configured for the environment.
 
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-Let me know if you would like me to explain or expand on any part of this documentation!
